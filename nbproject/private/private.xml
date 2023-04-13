@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
+        <file>
+            <url>src/tn/esprit/pidev/utils/MaConnection.java</url>
+            <bookmark id="1">
+                <name/>
+                <line>27</line>
+                <key/>
+            </bookmark>
+        </file>
+    </editor-bookmarks>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/conta/Downloads/Pidev3a38/src/tn/esprit/pidev/tests/MainClass.java</file>
+            <file>file:/C:/Users/conta/Downloads/Pidev3a38/src/tn/esprit/pidev/gui/AfficherListPersonFXML.fxml</file>
+            <file>file:/C:/Users/conta/Downloads/Pidev3a38/src/tn/esprit/pidev/gui/evaluationModule.fxml</file>
+            <file>file:/C:/Users/conta/Downloads/Pidev3a38/src/tn/esprit/pidev/gui/competenceInsert.fxml</file>
+            <file>file:/C:/Users/conta/Downloads/Pidev3a38/src/tn/esprit/pidev/gui/CompetenceInsertController.java</file>
+            <file>file:/C:/Users/conta/Downloads/Pidev3a38/src/tn/esprit/pidev/gui/showCompetences.fxml</file>
+        </group>
+    </open-files>
+</project-private>
