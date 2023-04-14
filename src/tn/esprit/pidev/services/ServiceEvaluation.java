@@ -79,7 +79,7 @@ public class ServiceEvaluation implements IService<Evaluation> {
         List<Evaluation> evaluations = new ArrayList<>();
         String req = "SELECT * FROM `evaluation` ev "
                 + "JOIN `poste` p ON ev.`poste_id`=p.`id` "
-                + "JOIN `competence_evaluation` ce ON ev.`id`=ce.`evaluation_id` "
+                + "JOIN `evaluation_competence` ce ON ev.`id`=ce.`evaluation_id` "
                 + "JOIN `competence` c ON ce.`competence_id`=c.`id`";
         Statement st = cnx.createStatement();
         ResultSet rs = st.executeQuery(req);

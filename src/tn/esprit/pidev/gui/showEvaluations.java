@@ -25,6 +25,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import tn.esprit.pidev.entities.Competence;
+import tn.esprit.pidev.entities.Evaluation;
 import tn.esprit.pidev.entities.Poste;
 import tn.esprit.pidev.services.ServiceCompetence;
 import tn.esprit.pidev.services.ServicePerson;
@@ -39,7 +40,7 @@ import tn.esprit.pidev.services.ServicePoste;
 
 
 
-public class showPostes implements Initializable  {
+public class showEvaluations implements Initializable  {
 
     @FXML
     private TextField nomField;
@@ -48,7 +49,7 @@ public class showPostes implements Initializable  {
     private TextField descriptionField;
 
     @FXML
-    private ListView<Poste> PostesList;
+    private ListView<Evaluation> evaluationsList;
 
       /**
      * Initializes the controller class.
@@ -56,7 +57,7 @@ public class showPostes implements Initializable  {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO  
-       PostesList.setOnMouseClicked(event -> {
+       evaluationsList.setOnMouseClicked(event -> {
     try {
         handleCompetenceClick(event);
     } catch (IOException ex) {

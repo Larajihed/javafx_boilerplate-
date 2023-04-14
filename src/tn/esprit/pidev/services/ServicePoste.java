@@ -16,28 +16,40 @@ import tn.esprit.pidev.utils.MaConnection;
 public class ServicePoste implements IService<Poste> {
 
     private Connection cnx = MaConnection.getInstance().getCnx();
+    
 
-    @Override
-    public void insertOne(Poste t) throws SQLException {
-        String req = "INSERT INTO `poste`(`nom`, `missions`, `description`, `salaire_min`, `salaire_max`) "
-                + "VALUES (?, ?, ?, ?, ?)";
-        PreparedStatement ps = cnx.prepareStatement(req, Statement.RETURN_GENERATED_KEYS);
-        ps.setString(1, t.getNom());
-        ps.setString(2, t.getMissions());
-        ps.setString(3, t.getDescription());
-        ps.setFloat(4, t.getSalaireMin());
-        ps.setFloat(5, t.getSalaireMax());
-        ps.executeUpdate();
+public void insert(Poste t, List<Competence> competences) throws SQLException {
+    String req = "INSERT INTO `poste`(`nom`, `missions`, `description`, `salaire_min`, `salaire_max`) "
+            + "VALUES (?, ?, ?, ?, ?)";
+    PreparedStatement ps = cnx.prepareStatement(req, Statement.RETURN_GENERATED_KEYS);
+    ps.setString(1, t.getNom());
+    ps.setString(2, t.getMissions());
+    ps.setString(3, t.getDescription());
+    ps.setFloat(4, t.getSalaireMin());
+    ps.setFloat(5, t.getSalaireMax());
+    ps.executeUpdate();
 
-        ResultSet rs = ps.getGeneratedKeys();
-        if (rs.next()) {
-            int id = rs.getInt(1);
-            t.setId(id);
-            System.out.println("Poste ajouté avec succès, ID: " + id);
-        } else {
-            System.err.println("Erreur lors de l'ajout du poste, ID non généré.");
+    ResultSet rs = ps.getGeneratedKeys();
+    if (rs.next()) {
+        int id = rs.getInt(1);
+        t.setId(id);
+        System.out.println("Poste ajouté avec succès, ID: " + id);
+
+        // Insert the competences for this poste into poste_competence table
+        for (Competence competence : competences) {
+            String competenceReq = "INSERT INTO `poste_competence`(`poste_id`, `competence_id`) VALUES (?, ?)";
+            PreparedStatement competencePs = cnx.prepareStatement(competenceReq);
+            competencePs.setInt(1, id);
+            competencePs.setInt(2, competence.getId());
+            competencePs.executeUpdate();
+            System.out.println("Competence " + competence.getNom() + " ajoutée au poste " + t.getNom());
         }
+    } else {
+        System.err.println("Erreur lors de l'ajout du poste, ID non généré.");
     }
+}
+
+
 
     @Override
     public void updateOne(Poste t) throws SQLException {
@@ -76,8 +88,12 @@ public class ServicePoste implements IService<Poste> {
     public List<Poste> selectAll() throws SQLException {
         List<Poste> postes = new ArrayList<>();
         String req = "SELECT * FROM `poste` p "
+                
+               
                 + "JOIN `poste_competence` cp ON p.`id`=cp.`poste_id` "
                 + "JOIN `competence` c ON cp.`competence_id`=c.`id`";
+
+
         Statement st = cnx.createStatement();
         ResultSet rs = st.executeQuery(req);
         int prevId = -1;
@@ -95,18 +111,22 @@ p.setMissions(rs.getString("missions"));
 p.setDescription(rs.getString("description"));
 p.setSalaireMin(rs.getFloat("salaire_min"));
 p.setSalaireMax(rs.getFloat("salaire_max"));
-p.setCompetences(new ArrayList<>());
+
+//p.setCompetences(new ArrayList<>());
 prevId = id;
 }
+            
 Competence c = new Competence();
 c.setId(rs.getInt("competence_id"));
 c.setNom(rs.getString("nom"));
 c.setDescription(rs.getString("description"));
 p.getCompetences().add(c);
+
 }
 if (p != null) {
 postes.add(p);
 }
+        System.out.println(postes);
 return postes;
 }
     
@@ -139,4 +159,9 @@ public Poste selectOne(int id) throws SQLException {
     }
     return p;
 }
+
+    @Override
+    public void insertOne(Poste t) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

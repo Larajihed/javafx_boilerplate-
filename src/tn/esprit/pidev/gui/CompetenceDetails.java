@@ -57,7 +57,7 @@ public class CompetenceDetails {
 
        Scene scene = new Scene(root);
             Stage stage = new Stage();
-            stage.setTitle("Mofification de comeptence");
+            stage.setTitle("Mofification de comptence");
             stage.setScene(scene);
             stage.show();   
     }

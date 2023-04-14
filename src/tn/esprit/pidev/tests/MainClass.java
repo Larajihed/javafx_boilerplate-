@@ -15,7 +15,7 @@ public class MainClass extends Application {
  @Override
     public void start(Stage primaryStage) {
         
-          this.primaryStage = primaryStage;
+        this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Car Manager");
 
         // Prevent the window resizing

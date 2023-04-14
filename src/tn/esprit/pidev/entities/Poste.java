@@ -19,6 +19,15 @@ public class Poste {
     private Float salaireMax;
     
     private Float salaireMin;
+
+    public Poste(String nom, String missions, String description, Collection<Competence> competences, Float salaireMax, Float salaireMin) {
+        this.nom = nom;
+        this.missions = missions;
+        this.description = description;
+        this.competences = competences;
+        this.salaireMax = salaireMax;
+        this.salaireMin = salaireMin;
+    }
     
     //private Collection<Evaluation> evaluations;
     
