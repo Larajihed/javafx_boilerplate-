@@ -76,7 +76,7 @@ public class ServicePoste implements IService<Poste> {
     public List<Poste> selectAll() throws SQLException {
         List<Poste> postes = new ArrayList<>();
         String req = "SELECT * FROM `poste` p "
-                + "JOIN `competence_poste` cp ON p.`id`=cp.`poste_id` "
+                + "JOIN `poste_competence` cp ON p.`id`=cp.`poste_id` "
                 + "JOIN `competence` c ON cp.`competence_id`=c.`id`";
         Statement st = cnx.createStatement();
         ResultSet rs = st.executeQuery(req);

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="500" prefWidth="1000" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.pidev.gui.CompetenceInsertController">
+<AnchorPane id="AnchorPane" prefHeight="500" prefWidth="1000" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.pidev.gui.competenceInsert">
    <Label layoutX="256.0" layoutY="87.0" style="-fx-font-weight: bold;" text="Ajouter Une Compétence">
       <font>
          <Font size="24.0" />
@@ -21,11 +21,6 @@
          <Label layoutX="11.0" layoutY="81.0" text="Description" />
          <Label layoutX="126.0" layoutY="7.0" text="*" textFill="RED" />
          <Button layoutX="209.0" layoutY="233.0" onAction="#handleInsert" prefHeight="54.0" prefWidth="135.0" style="-fx-background-color: blue;" text="Ajouter" textFill="WHITE">
-            <font>
-               <Font size="19.0" />
-            </font>
-         </Button>
-          <Button layoutX="0.0" layoutY="233.0" onAction="#showCompetences" prefHeight="54.0" prefWidth="135.0" style="-fx-background-color: blue;" text="Competences" textFill="WHITE">
             <font>
                <Font size="19.0" />
             </font>

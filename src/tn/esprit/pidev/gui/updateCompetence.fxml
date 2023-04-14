@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="500" prefWidth="1000" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.pidev.gui.CompetenceInsertController">
+<AnchorPane id="AnchorPane" prefHeight="500" prefWidth="1000" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.pidev.gui.updateCompetence">
    <Label layoutX="256.0" layoutY="87.0" style="-fx-font-weight: bold;" text="Ajouter Une Compétence">
       <font>
          <Font size="24.0" />
@@ -20,7 +20,7 @@
          <Label layoutX="11.0" layoutY="10.0" text="Nom de compétence" />
          <Label layoutX="11.0" layoutY="81.0" text="Description" />
          <Label layoutX="126.0" layoutY="7.0" text="*" textFill="RED" />
-         <Button layoutX="209.0" layoutY="233.0" onAction="#handleInsert" prefHeight="54.0" prefWidth="135.0" style="-fx-background-color: blue;" text="Ajouter" textFill="WHITE">
+         <Button layoutX="209.0" layoutY="233.0" onAction="#handleInsert"   prefHeight="54.0" prefWidth="135.0" style="-fx-background-color: blue;" text="Modifier" textFill="WHITE">
             <font>
                <Font size="19.0" />
             </font>
@@ -28,7 +28,7 @@
          <Label id="errorTxt" layoutX="14.0" layoutY="272.0" textFill="RED" />
       </children>
    </AnchorPane>
-   <Button layoutX="256.0" layoutY="46.0" onAction="#handleInsert" prefHeight="26.0" prefWidth="99.0" text="Retour">
+   <Button layoutX="256.0" layoutY="46.0" prefHeight="26.0" prefWidth="99.0" text="Retour">
       <font>
          <Font size="19.0" />
       </font>

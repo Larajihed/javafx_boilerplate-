@@ -6,24 +6,42 @@ import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class MainClass extends Application {
+ private Stage primaryStage;
 
-    @Override
+ @Override
     public void start(Stage primaryStage) {
         
+          this.primaryStage = primaryStage;
+        this.primaryStage.setTitle("Car Manager");
+
+        // Prevent the window resizing
+        this.primaryStage.setResizable(false);
+
+        showDashboard();
+    }
+        public void showDashboard() {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("../gui/competenceInsert.fxml")) ;
-            Scene scene = new Scene(root,1000,500);
-            primaryStage.setTitle("JAVAFX WORKSHOP");
+            // Load login page
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainClass.class.getResource("../gui/Dashboard.fxml"));
+            AnchorPane dashboard = (AnchorPane) loader.load();
+
+            // Set the scene containing the login page
+            Scene scene = new Scene(dashboard);
             primaryStage.setScene(scene);
+
+
+            // Show the scene
             primaryStage.show();
-        } catch (IOException ex) {
-            System.err.println(ex.getMessage());
-            ex.printStackTrace();
+        } catch(IOException e) {
+            e.printStackTrace();
         }
     }
+    
 
        /**
      * @param args the command line arguments

@@ -10,15 +10,18 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import tn.esprit.pidev.gui.CompetenceDetails;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import tn.esprit.pidev.entities.Competence;
 import tn.esprit.pidev.services.ServiceCompetence;
@@ -33,37 +36,61 @@ import tn.esprit.pidev.services.ServicePerson;
 
 
 
-public class CompetenceInsertController implements Initializable  {
+public class showCompetences implements Initializable  {
 
     @FXML
     private TextField nomField;
     
     @FXML
     private TextField descriptionField;
-    
-    
+
+    @FXML
+    private ListView<Competence> competencesList;
+
       /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        // TODO  
+       competencesList.setOnMouseClicked(event -> {
+    try {
+        handleCompetenceClick(event);
+    } catch (IOException ex) {
+        System.err.println(ex.getMessage());
+        ex.printStackTrace();
+    }
+});
+
     }    
+
+    @FXML
+private void handleCompetenceClick(MouseEvent event) throws IOException {
+    if (event.getClickCount() == 2) { // Only handle double-click events
+        Competence selectedCompetence = competencesList.getSelectionModel().getSelectedItem();
+        if (selectedCompetence != null) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/CompetenceDetails.fxml"));
+            Parent root = loader.load();
+            CompetenceDetails detailsController = loader.getController();
+            detailsController.showDetails(selectedCompetence);
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setTitle("Détails de la compétence");
+            stage.setScene(scene);
+            stage.show();
+        }
+    }
+}
+
     
     @FXML
-    private void showCompetences(ActionEvent event) {
+    private void showAddCompetence(ActionEvent event) {
     try {
-        System.out.println("working here");
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/showCompetences.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/competenceInsert.fxml"));
         Parent root = loader.load();
         // Get the ListView from the FXML file
-        ListView<Competence> listView = (ListView<Competence>) root.lookup("#competencesList");
-        // Retrieve the list of competences
         ServiceCompetence cp = new ServiceCompetence();
         List<Competence> competences = cp.selectAll();
-        // Set the items of the ListView
-        ObservableList<Competence> items = FXCollections.observableArrayList(competences);
-        listView.setItems(items);
         Scene scene = new Scene(root);
         Stage st = new Stage();
         st.setTitle("Liste des Competences");
@@ -77,37 +104,10 @@ public class CompetenceInsertController implements Initializable  {
         ex.printStackTrace();
     }
 }
-
-    @FXML
-    private void handleInsert(ActionEvent event) {
-        
-         String nom = nomField.getText();
-    String description = descriptionField.getText();
-        
-     if (nom.isEmpty()) {
-            Alert al = new Alert(Alert.AlertType.WARNING);
-            al.setTitle("Controle de saisie");
-            al.setContentText("Veuillez remplir tout les champs !!");
-            al.show();
-            return;
-        }    
-   
-    ServiceCompetence cp = new ServiceCompetence();
-
-    Competence newCompetence = new Competence(nom, description);
-    
-    try {
-        cp.insertOne(newCompetence);
-        System.out.println("Competence inserted: " + newCompetence);
-    } catch (SQLException e) {
-        e.printStackTrace();
-        System.out.println("Erreur lors de l'insertion de la competence");
-    }
-
-}
-
     
     
+
   
+
 
 }
