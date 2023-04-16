@@ -19,27 +19,29 @@ public class ServiceEvaluation implements IService<Evaluation> {
 
     private Connection cnx = MaConnection.getInstance().getCnx();
 
-    @Override
-    public void insertOne(Evaluation t) throws SQLException {
-        String req = "INSERT INTO `evaluation`(`date`, `commentaire`, `experience`, `level`, `poste_id`) "
-                + "VALUES (?, ?, ?, ?, ?)";
-        PreparedStatement ps = cnx.prepareStatement(req, Statement.RETURN_GENERATED_KEYS);
-        ps.setDate(1, new java.sql.Date(t.getDate().getTime()));
-        ps.setString(2, t.getCommentaire());
-        ps.setInt(3, t.getExperience());
-        ps.setString(4, t.getLevel());
-        ps.setInt(5, t.getPoste().getId());
-        ps.executeUpdate();
+public void insertEvaluation(Evaluation t, int employeeId) throws SQLException {
+    String req = "INSERT INTO `evaluation`(`date`, `commentaire`, `experience`, `level`, `poste_id`, `employee_id`) "
+            + "VALUES (?, ?, ?, ?, ?, ?)";
+    PreparedStatement ps = cnx.prepareStatement(req, Statement.RETURN_GENERATED_KEYS);
+    ps.setDate(1, new java.sql.Date(t.getDate().getTime()));
+    ps.setString(2, t.getCommentaire());
+    ps.setInt(3, t.getExperience());
+    ps.setString(4, t.getLevel());
+    ps.setInt(5, t.getPoste().getId());
+    ps.setInt(6, employeeId); // pass the employee_id as a parameter
+    ps.executeUpdate();
 
-        ResultSet rs = ps.getGeneratedKeys();
-        if (rs.next()) {
-            int id = rs.getInt(1);
-            t.setId(id);
-            System.out.println("Evaluation ajoutée avec succès, ID: " + id);
-        } else {
-            System.err.println("Erreur lors de l'ajout de l'évaluation, ID non généré.");
-        }
+    ResultSet rs = ps.getGeneratedKeys();
+    if (rs.next()) {
+        int id = rs.getInt(1);
+        t.setId(id);
+        System.out.println("Evaluation ajoutée avec succès, ID: " + id);
+    } else {
+        System.err.println("Erreur lors de l'ajout de l'évaluation, ID non généré.");
     }
+}
+
+
 
     @Override
     public void updateOne(Evaluation t) throws SQLException {
@@ -156,4 +158,9 @@ public Collection<Evaluation> selectByPoste(Poste poste) throws SQLException {
     }
     return evaluations;
 }
+
+    @Override
+    public void insertOne(Evaluation t) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

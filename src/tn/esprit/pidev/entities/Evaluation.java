@@ -25,7 +25,7 @@ private Date date;
 
 private String commentaire;
 
-//private User employee;
+private Employee employee;
 
 private Integer experience;
 

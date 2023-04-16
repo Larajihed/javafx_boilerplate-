@@ -53,7 +53,18 @@ private ObservableList<Competence> initialCompetencesList = FXCollections.observ
 
     @FXML
     private void handleInsert(ActionEvent event) {
-        String nom = nomField.getText();
+        
+                 String nom = nomField.getText();
+
+        if (nom.isEmpty()) {
+            Alert al = new Alert(Alert.AlertType.WARNING);
+            al.setTitle("Controle de saisie");
+            al.setContentText("Veuillez remplir tout les champs !!");
+            al.show();
+            return;
+        }   
+        
+        
         String missions = missionsArea.getText();
         String description = descriptionArea.getText();
         Float salaireMin = Float.parseFloat(salaireMinField.getText());
@@ -110,7 +121,7 @@ private ObservableList<Competence> initialCompetencesList = FXCollections.observ
         Competence selectedCompetence = competencesList.getSelectionModel().getSelectedItem();
 
         if (selectedCompetence != null) {
-            competences.remove(selectedCompetence);
+            competences.remove(selectedCompetence); 
             initialCompetencesList.remove(selectedCompetence);
         }
     }

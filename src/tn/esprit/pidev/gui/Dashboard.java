@@ -119,7 +119,6 @@ private void showPostes(ActionEvent event) {
       @FXML
     private void showEvaluations(ActionEvent event) {
     try {
-        System.out.println("working here");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/showEvaluations.fxml"));
         Parent root = loader.load();
         // Get the ListView from the FXML file

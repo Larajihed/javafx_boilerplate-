@@ -1,6 +1,8 @@
 package tn.esprit.pidev.tests;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
@@ -8,15 +10,29 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import tn.esprit.pidev.entities.Employee;
+import tn.esprit.pidev.services.ServiceCompetence;
+import tn.esprit.pidev.services.ServiceEmployee;
 
 public class MainClass extends Application {
  private Stage primaryStage;
 
  @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws SQLException {
         
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Car Manager");
+        
+        
+        
+            ServiceEmployee se = new ServiceEmployee();
+
+            List<Employee> employees = se.selectAll();
+           
+            System.out.println(employees);
+        
+
+           
 
         // Prevent the window resizing
         this.primaryStage.setResizable(false);
