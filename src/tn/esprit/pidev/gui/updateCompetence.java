@@ -26,10 +26,8 @@ public class updateCompetence  implements Initializable  {
     
     @FXML
     private TextField nomField;
-    
     @FXML
     private TextField descriptionField;
-    
     Competence c =new Competence();
     
      public void showDetails(Competence competence) {
@@ -38,7 +36,6 @@ public class updateCompetence  implements Initializable  {
         c = competence;
          System.out.println(c);
     }
-     
      
       @FXML
     private void handleInsert(ActionEvent event) {

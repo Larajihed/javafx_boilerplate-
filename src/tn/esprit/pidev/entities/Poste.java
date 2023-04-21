@@ -36,6 +36,10 @@ public class Poste {
        // this.evaluations = new ArrayList<>();
     }
 
+    public Poste(int posteId) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     public Integer getId() {
         return id;
     }
