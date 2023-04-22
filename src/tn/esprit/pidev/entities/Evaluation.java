@@ -21,7 +21,7 @@ private Integer id;
         return "Evaluation{" + "id=" + id + ", date=" + date + ", commentaire=" + commentaire + ", experience=" + experience + ", level=" + level + ", competences=" + competences + ", poste=" + poste + '}';
     }
 
-private Date date;
+private java.sql.Date date;
 
 private String commentaire;
 
@@ -52,7 +52,7 @@ public void setId(Integer id) {
 public Date getDate() {
     return date;
 }
-public void setDate(Date date) {
+public void setDate(java.sql.Date date) {
     this.date = date;
 }
 
@@ -98,7 +98,7 @@ public void setPoste(Poste poste) {
 }
 
     public void setEmployee(Employee employee) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.employee=employee;
     }
 
 

@@ -46,7 +46,6 @@ public class CompetenceDetails {
        FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/updateCompetence.fxml"));
        Parent root = loader.load();
         
-       System.out.println("woerkiii");
        
        try {
         updateCompetence updateCompetence = loader.getController();

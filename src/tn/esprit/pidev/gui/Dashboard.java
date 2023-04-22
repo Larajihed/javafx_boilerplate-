@@ -126,6 +126,7 @@ private void showPostes(ActionEvent event) {
         // Retrieve the list of competences
         ServiceEvaluation se = new ServiceEvaluation();
         List<Evaluation> evaluations = se.selectAll();
+        System.out.println(evaluations);
         // Set the items of the ListView
         ObservableList<Evaluation> items = FXCollections.observableArrayList(evaluations);
         listView.setItems(items);

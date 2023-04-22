@@ -89,4 +89,25 @@ public class ServiceEmployee implements IService<Employee>  {
     return employees;
 }
     
+    public Employee selectOne(int id) throws SQLException {
+    String req = "SELECT * FROM `user` WHERE `id` = ?";
+    PreparedStatement ps = cnx.prepareStatement(req);
+    ps.setInt(1, id);
+    ResultSet rs = ps.executeQuery();
+    if (rs.next()) {
+        Employee employee = new Employee();
+        employee.setId(rs.getInt("id"));
+        employee.setNom(rs.getString("nom"));
+        employee.setPrenom(rs.getString("prenom"));
+        employee.setEmail(rs.getString("email"));
+        employee.setNomsociete(rs.getString("nomsociete"));
+        employee.setVerified(rs.getBoolean("is_verified"));
+        employee.setPassword(rs.getString("password"));
+        employee.setRoles(rs.getString("roles"));
+        return employee;
+    }
+    return null;
+}
+
+    
 }

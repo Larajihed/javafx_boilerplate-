@@ -133,7 +133,7 @@ return postes;
 
 public Poste selectOne(int id) throws SQLException {
     String req = "SELECT * FROM `poste` p "
-            + "JOIN `competence_poste` cp ON p.`id`=cp.`poste_id` "
+            + "JOIN `poste_competence` cp ON p.`id`=cp.`poste_id` "
             + "JOIN `competence` c ON cp.`competence_id`=c.`id` "
             + "WHERE p.`id`=?";
     PreparedStatement ps = cnx.prepareStatement(req);

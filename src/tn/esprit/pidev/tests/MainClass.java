@@ -29,7 +29,6 @@ public class MainClass extends Application {
 
             List<Employee> employees = se.selectAll();
            
-            System.out.println(employees);
         
 
            

@@ -93,7 +93,7 @@ private void handleCompetenceClick(MouseEvent event) throws IOException {
     private void showAddPoste(ActionEvent event) {
         
     try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/posteInsert.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/evaluationInsert.fxml"));
         Parent root = loader.load();
         // Get the ListView from the FXML file
         ServicePoste sp = new ServicePoste();

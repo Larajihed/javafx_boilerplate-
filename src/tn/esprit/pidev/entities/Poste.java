@@ -104,10 +104,16 @@ public class Poste {
     //public void setEvaluations(Collection<Evaluation> evaluations) {
        // this.evaluations = evaluations;
     //}
-
+/*
     @Override
     public String toString() {
         return "Poste{" + "id=" + id + ", nom=" + nom + ", missions=" + missions + ", description=" + description + ", competences=" + competences + ", salaireMax=" + salaireMax + ", salaireMin=" + salaireMin + '}';
+    }
+*/
+    
+       @Override
+    public String toString() {
+        return this.nom; // or any other field that you want to display in the ComboBox
     }
 
 

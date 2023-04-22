@@ -79,10 +79,7 @@ public void insertEvaluation(Evaluation t, int employeeId) throws SQLException {
     @Override
     public List<Evaluation> selectAll() throws SQLException {
         List<Evaluation> evaluations = new ArrayList<>();
-        String req = "SELECT * FROM `evaluation` ev "
-                + "JOIN `poste` p ON ev.`poste_id`=p.`id` "
-                + "JOIN `evaluation_competence` ce ON ev.`id`=ce.`evaluation_id` "
-                + "JOIN `competence` c ON ce.`competence_id`=c.`id`";
+        String req = "SELECT * FROM `evaluation` ev";
         Statement st = cnx.createStatement();
         ResultSet rs = st.executeQuery(req);
         int prevId = -1;
@@ -102,16 +99,11 @@ public void insertEvaluation(Evaluation t, int employeeId) throws SQLException {
             e.setLevel(rs.getString("level"));
             Poste p = new Poste();
             p.setId(rs.getInt("poste_id"));
-            p.setDescription(rs.getString("description"));
             e.setPoste(p);
             e.setCompetences(new ArrayList<>());
             prevId = id;
         }
-        Competence c = new Competence();
-        c.setId(rs.getInt("competence_id"));
-        c.setNom(rs.getString("nom"));
-        c.setDescription(rs.getString("description"));
-        e.getCompetences().add(c);
+  
     }
     if (e != null) {
         evaluations.add(e);
