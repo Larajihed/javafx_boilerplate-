@@ -82,7 +82,6 @@ public class ServiceEmployee implements IService<Employee>  {
             employee.setPassword(rs.getString("password"));
 
         employee.setRoles(rs.getString("roles"));
-                    System.out.println(employee);
 
         employees.add(employee);
     }

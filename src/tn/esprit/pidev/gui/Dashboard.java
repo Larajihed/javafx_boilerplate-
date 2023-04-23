@@ -6,20 +6,32 @@ package tn.esprit.pidev.gui;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import tn.esprit.pidev.entities.Competence;
@@ -35,12 +47,95 @@ import tn.esprit.pidev.services.ServicePoste;
 public class Dashboard  implements Initializable {
     
         private Stage showCompetencesStage;
+        
+        @FXML
+private BarChart<String, Number> barChart;
+@FXML
+private AnchorPane barChartPane;
 
-       @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }   
-    
+@FXML
+private AnchorPane pieChartPane;
+
+@Override
+public void initialize(URL url, ResourceBundle rb) {
+    ServiceEvaluation se = new ServiceEvaluation();
+    try {
+        int seniorCount = se.countEmployeesByLevel("senior");
+        int stagaireCount = se.countEmployeesByLevel("stagaire");
+        int midLevelCount = se.countEmployeesByLevel("mid-level");
+        int juniorCount = se.countEmployeesByLevel("junior");
+        CategoryAxis xAxis = new CategoryAxis();
+        xAxis.setCategories(FXCollections.<String>observableArrayList(Arrays.asList("Senior", "Stagaire", "Mid-Level", "Junior")));
+
+        NumberAxis yAxis = new NumberAxis();
+        yAxis.setLabel("Employee Count");
+
+        BarChart<String,Number> barChart = new BarChart<>(xAxis,yAxis);
+        XYChart.Series<String,Number> series = new XYChart.Series<>();
+        series.getData().add(new XYChart.Data<>("Senior", seniorCount));
+        series.getData().add(new XYChart.Data<>("Stagaire", stagaireCount));
+        series.getData().add(new XYChart.Data<>("Mid-Level", midLevelCount));
+        series.getData().add(new XYChart.Data<>("Junior", juniorCount));
+        barChart.getData().add(series);
+        barChart.setLegendVisible(false);
+
+        barChartPane.getChildren().add(barChart);
+
+    } catch (SQLException ex) {
+        Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+    }
+
+    try {
+      PieChart pieChart = new PieChart();
+pieChart.setTitle("Niveau des Employés");
+Map<String, Integer> counts = se.countEmployeesByLevel();
+ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
+counts.forEach((level, count) -> pieChartData.add(new PieChart.Data(level, count)));
+pieChart.setData(pieChartData);
+pieChartPane.getChildren().add(pieChart);
+    } catch (SQLException ex) {
+        Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+    }
+}
+
+@FXML
+private void showLevelBarChart(ActionEvent event) {
+    try {
+        // Retrieve the data for the bar chart
+        ServiceEvaluation se = new ServiceEvaluation();
+        int seniorCount = se.countEmployeesByLevel("senior");
+        int stagiaireCount = se.countEmployeesByLevel("stagiaire");
+        int midLevelCount = se.countEmployeesByLevel("mid-level");
+        int juniorCount = se.countEmployeesByLevel("junior");
+
+        // Create the bar chart
+        CategoryAxis xAxis = new CategoryAxis();
+        NumberAxis yAxis = new NumberAxis();
+        BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
+
+        // Set the data for the bar chart
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        series.setName("Niveau des employés");
+        series.getData().add(new XYChart.Data<>("Senior", seniorCount));
+        series.getData().add(new XYChart.Data<>("Stagiaire", stagiaireCount));
+        series.getData().add(new XYChart.Data<>("Mid-level", midLevelCount));
+        series.getData().add(new XYChart.Data<>("Junior", juniorCount));
+        barChart.getData().add(series);
+
+        // Add the bar chart to the dashboard
+        VBox vbox = new VBox();
+        vbox.setSpacing(10);
+        vbox.getChildren().add(barChart);
+        Scene scene = new Scene(vbox, 600, 400);
+        Stage st = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        st.setScene(scene);
+    } catch (SQLException ex) {
+        System.err.println(ex.getMessage());
+        ex.printStackTrace();
+    }
+}
+
+
    // Navigation 
     
    @FXML
@@ -120,13 +215,13 @@ private void showPostes(ActionEvent event) {
     private void showEvaluations(ActionEvent event) {
     try {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/showEvaluations.fxml"));
+        
         Parent root = loader.load();
         // Get the ListView from the FXML file
         ListView<Evaluation> listView = (ListView<Evaluation>) root.lookup("#evaluationsList");
         // Retrieve the list of competences
         ServiceEvaluation se = new ServiceEvaluation();
         List<Evaluation> evaluations = se.selectAll();
-        System.out.println(evaluations);
         // Set the items of the ListView
         ObservableList<Evaluation> items = FXCollections.observableArrayList(evaluations);
         listView.setItems(items);
@@ -167,5 +262,37 @@ private void showPostes(ActionEvent event) {
     }
     
 }
+    
+  @FXML
+private void showLevelPieChart(ActionEvent event) {
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/levelPieChart.fxml"));
+        Parent root = loader.load();
+
+        PieChart pieChart = (PieChart) root.lookup("#levelPieChart");
+
+        ServiceEvaluation evaluationService = new ServiceEvaluation();
+        Map<String, Integer> counts = evaluationService.countEmployeesByLevel();
+
+        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
+        counts.forEach((level, count) -> pieChartData.add(new PieChart.Data(level, count)));
+
+        pieChart.setData(pieChartData);
+
+        Scene scene = new Scene(root);
+        Stage st = new Stage();
+        st.setTitle("Niveau des Employés");
+        st.setScene(scene);
+        st.show();
+    } catch (IOException ex) {
+        System.err.println(ex.getMessage());
+        ex.printStackTrace();
+    } catch (SQLException ex) {
+        System.err.println(ex.getMessage());
+        ex.printStackTrace();
+    }
+}
+
+
     
 }

@@ -93,6 +93,11 @@ public Poste getPoste() {
     return poste;
 }
 
+public Employee getEmployee() {
+    return employee;
+}
+
+
 public void setPoste(Poste poste) {
     this.poste = poste;
 }

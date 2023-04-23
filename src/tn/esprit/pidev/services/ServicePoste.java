@@ -126,7 +126,6 @@ p.getCompetences().add(c);
 if (p != null) {
 postes.add(p);
 }
-        System.out.println(postes);
 return postes;
 }
     

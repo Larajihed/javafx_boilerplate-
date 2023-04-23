@@ -17,8 +17,13 @@
                 <Font size="24.0" />
             </font>
         </Label>
+        <Button fx:id="importButton" layoutX="359.0" layoutY="345.0" onAction="#handleImport" prefHeight="54.0" prefWidth="110.0" style="-fx-background-color: blue;" text="Importer" textFill="WHITE">
+    <font>
+        <Font size="19.0" />
+    </font>
+</Button>
         <Label layoutX="59.0" layoutY="119.0" text="Date" />
-<DatePicker fx:id="datePicker" layoutX="59.0" layoutY="141.0" prefWidth="180.0" promptText="Select Date" />
+        <DatePicker fx:id="datePicker" layoutX="59.0" layoutY="141.0" prefWidth="180.0" promptText="Select Date" />
         <Label layoutX="303.0" layoutY="119.0" text="Expérience" />
         <TextField fx:id="experienceField" layoutX="305.0" layoutY="141.0" prefWidth="180.0" promptText="Expérience" />
         <Label layoutX="59.0" layoutY="169.0" text="Commentaire" />
