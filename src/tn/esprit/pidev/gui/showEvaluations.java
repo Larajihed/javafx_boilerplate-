@@ -131,7 +131,6 @@ private void renderEvaluationsAsCards() {
         
         int start = pageIndex * 5;
         int end = Math.min(start + 12, evaluations.size());
-        
         for (int i = start; i < end; i += 4) {
             HBox row = new HBox(10);
             row.setAlignment(Pos.CENTER);
@@ -248,9 +247,6 @@ private void handleCompetenceClick(MouseEvent event) throws IOException {
         // Get the ListView from the FXML file
         ServicePoste sp = new ServicePoste();
         List<Poste> postes = sp.selectAll();
-        
-    
-        
         Scene scene = new Scene(root);
         Stage st = new Stage();
         st.setTitle("Liste des postes");
@@ -262,12 +258,6 @@ private void handleCompetenceClick(MouseEvent event) throws IOException {
     } catch (SQLException ex) {
         System.err.println(ex.getMessage());
         ex.printStackTrace();
+    }    
     }
-        
-        
-    }
-    
-    
-
-
 }

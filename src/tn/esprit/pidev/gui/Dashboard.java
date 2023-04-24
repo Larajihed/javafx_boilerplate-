@@ -105,11 +105,11 @@ public void initialize(URL url, ResourceBundle rb) {
             }
     try {
         int seniorCount = se.countEmployeesByLevel("senior");
-        int stagaireCount = se.countEmployeesByLevel("stagaire");
+        int stagaireCount = se.countEmployeesByLevel("Intern");
         int midLevelCount = se.countEmployeesByLevel("mid-level");
         int juniorCount = se.countEmployeesByLevel("junior");
         CategoryAxis xAxis = new CategoryAxis();
-        xAxis.setCategories(FXCollections.<String>observableArrayList(Arrays.asList("Senior", "Stagaire", "Mid-Level", "Junior")));
+        xAxis.setCategories(FXCollections.<String>observableArrayList(Arrays.asList("Senior", "Intern", "Mid-Level", "Junior")));
 
         NumberAxis yAxis = new NumberAxis();
         yAxis.setLabel("Employee Count");
@@ -117,7 +117,7 @@ public void initialize(URL url, ResourceBundle rb) {
         BarChart<String,Number> barChart = new BarChart<>(xAxis,yAxis);
         XYChart.Series<String,Number> series = new XYChart.Series<>();
         series.getData().add(new XYChart.Data<>("Senior", seniorCount));
-        series.getData().add(new XYChart.Data<>("Stagaire", stagaireCount));
+        series.getData().add(new XYChart.Data<>("Intern", stagaireCount));
         series.getData().add(new XYChart.Data<>("Mid-Level", midLevelCount));
         series.getData().add(new XYChart.Data<>("Junior", juniorCount));
         barChart.getData().add(series);
@@ -148,7 +148,7 @@ private void showLevelBarChart(ActionEvent event) {
         // Retrieve the data for the bar chart
         ServiceEvaluation se = new ServiceEvaluation();
         int seniorCount = se.countEmployeesByLevel("senior");
-        int stagiaireCount = se.countEmployeesByLevel("stagiaire");
+        int stagiaireCount = se.countEmployeesByLevel("intern");
         int midLevelCount = se.countEmployeesByLevel("mid-level");
         int juniorCount = se.countEmployeesByLevel("junior");
 

@@ -10,32 +10,32 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400" prefWidth="664.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.pidev.gui.evaluationInsert">
+<AnchorPane id="AnchorPane" prefHeight="400" prefWidth="483.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.pidev.gui.evaluationInsert">
     <children>
-        <Label layoutX="189.0" layoutY="21.0" style="-fx-font-weight: bold;" text="Ajouter une évaluation">
+        <Label layoutX="19.0" layoutY="28.0" style="-fx-font-weight: bold;" text="Ajouter une évaluation">
             <font>
                 <Font size="24.0" />
             </font>
         </Label>
-        <Button fx:id="importButton" layoutX="59.0" layoutY="338.0" onAction="#handleImport" prefHeight="35.0" prefWidth="155.0" style="-fx-background-color: grey;" text="Importer (CSV, Excel)" textFill="WHITE">
+        <Button fx:id="importButton" layoutX="22.0" layoutY="329.0" onAction="#handleImport" prefHeight="35.0" prefWidth="155.0" style="-fx-background-color: grey;" text="Importer (CSV, Excel)" textFill="WHITE">
     <font>
         <Font size="13.0" />
     </font>
 </Button>
-        <Label layoutX="59.0" layoutY="119.0" text="Date" />
-        <DatePicker fx:id="datePicker" layoutX="59.0" layoutY="141.0" prefWidth="180.0" promptText="Select Date" />
-        <Label layoutX="303.0" layoutY="119.0" text="Expérience" />
-        <TextField fx:id="experienceField" layoutX="305.0" layoutY="141.0" prefWidth="180.0" promptText="Expérience" />
-        <Label layoutX="59.0" layoutY="212.0" text="Commentaire" />
-        <TextArea fx:id="commentaireArea" layoutX="59.0" layoutY="229.0" prefHeight="100.0" prefWidth="426.0" promptText="Commentaire" />
-        <Label layoutX="305.0" layoutY="169.0" text="Level" />
-        <ComboBox fx:id="levelComboBox" layoutX="305.0" layoutY="193.0" prefWidth="180.0" promptText="Niveau" />
-        <Label layoutX="59.0" layoutY="64.0" text="Poste ID" /> 
-        <ComboBox fx:id="posteComboBox" layoutX="59.0" layoutY="88.0" prefWidth="180.0" promptText="Select Poste" />
-        <Label layoutX="305.0" layoutY="64.0" text="Employee ID" />
-                <ComboBox fx:id="employeeComboBox" layoutX="305.0" layoutY="88.0" prefWidth="180.0" promptText="Select Employée" />
+        <Label layoutX="19.0" layoutY="110.0" text="Date" />
+        <DatePicker fx:id="datePicker" layoutX="19.0" layoutY="132.0" prefWidth="180.0" promptText="Select Date" />
+        <Label layoutX="263.0" layoutY="110.0" text="Expérience" />
+        <TextField fx:id="experienceField" layoutX="265.0" layoutY="132.0" prefWidth="180.0" promptText="Expérience" />
+        <Label layoutX="19.0" layoutY="203.0" text="Commentaire" />
+        <TextArea fx:id="commentaireArea" layoutX="19.0" layoutY="220.0" prefHeight="100.0" prefWidth="426.0" promptText="Commentaire" />
+        <Label layoutX="265.0" layoutY="160.0" text="Level" />
+        <ComboBox fx:id="levelComboBox" layoutX="265.0" layoutY="184.0" prefWidth="180.0" promptText="Niveau" />
+        <Label layoutX="19.0" layoutY="55.0" text="Poste ID" /> 
+        <ComboBox fx:id="posteComboBox" layoutX="19.0" layoutY="79.0" prefWidth="180.0" promptText="Select Poste" />
+        <Label layoutX="265.0" layoutY="55.0" text="Employee ID" />
+                <ComboBox fx:id="employeeComboBox" layoutX="265.0" layoutY="79.0" prefWidth="180.0" promptText="Select Employée" />
 
-        <Button layoutX="375.0" layoutY="338.0" onAction="#handleInsert" prefHeight="35.0" prefWidth="110.0" style="-fx-background-color: blue;" text="Ajouter" textFill="WHITE">
+        <Button layoutX="329.0" layoutY="329.0" onAction="#handleInsert" prefHeight="35.0" prefWidth="110.0" style="-fx-background-color: blue;" text="Ajouter" textFill="WHITE">
             <font>
                 <Font size="19.0" />
             </font>
