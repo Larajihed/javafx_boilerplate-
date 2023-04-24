@@ -18,7 +18,7 @@ private Integer id;
 
     @Override
     public String toString() {
-        return "Evaluation{" + "id=" + id + ", date=" + date + ", commentaire=" + commentaire + ", experience=" + experience + ", level=" + level + ", competences=" + competences + ", poste=" + poste + '}';
+        return "Evaluation{" + "id=" + id + ", date=" + date + ", commentaire=" + commentaire + ", experience=" + experience + ", level=" + level + ", competences=" + competences + ", poste=" + poste + "emp=" + employee + '}';
     }
 
 private java.sql.Date date;

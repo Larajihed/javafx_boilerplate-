@@ -21,7 +21,7 @@ public class MainClass extends Application {
     public void start(Stage primaryStage) throws SQLException {
         
         this.primaryStage = primaryStage;
-        this.primaryStage.setTitle("Car Manager");
+        this.primaryStage.setTitle("Evaluations Des Employées");
         
         
         

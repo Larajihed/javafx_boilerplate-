@@ -107,13 +107,12 @@ public List<Evaluation> selectAll() throws SQLException {
             e.setCompetences(new ArrayList<>());
             prevId = id;
         }
-        
-      
     }
     
     if (e != null) {
         evaluations.add(e);
     }
+    
     
     return evaluations;
 }
@@ -190,17 +189,34 @@ public Map<String, Integer> countEmployeesByLevel() throws SQLException {
 }
 
 public List<Evaluation> selectByDate(LocalDate startDate, LocalDate endDate) throws SQLException {
-    String query = "SELECT * FROM evaluation WHERE evaluation_date BETWEEN ? AND ?";
-    PreparedStatement st =  cnx.prepareStatement(query);
+    String query = "SELECT * FROM evaluation WHERE date BETWEEN ? AND ?";
+    PreparedStatement st = cnx.prepareStatement(query);
     st.setDate(1, java.sql.Date.valueOf(startDate));
     st.setDate(2, java.sql.Date.valueOf(endDate));
     ResultSet rs = st.executeQuery();
 
     List<Evaluation> evaluations = new ArrayList<>();
+    while (rs.next()) {
+        Evaluation evaluation = new Evaluation();
+        evaluation.setId(rs.getInt("id"));
+evaluation.setDate(rs.getDate("date"));
+        evaluation.setCommentaire(rs.getString("commentaire"));
+        evaluation.setExperience(rs.getInt("experience"));
+        evaluation.setLevel(rs.getString("level"));
+
+      
+
+ 
+        evaluations.add(evaluation);
+    }
+    
+    // Close resources
+    rs.close();
+    st.close();
     cnx.close();
+    
     return evaluations;
 }
-
 
     
     

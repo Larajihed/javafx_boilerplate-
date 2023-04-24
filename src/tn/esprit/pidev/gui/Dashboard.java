@@ -31,13 +31,16 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import tn.esprit.pidev.entities.Competence;
 import tn.esprit.pidev.entities.Evaluation;
 import tn.esprit.pidev.entities.Poste;
 import tn.esprit.pidev.services.ServiceCompetence;
+import tn.esprit.pidev.services.ServiceEmployee;
 import tn.esprit.pidev.services.ServiceEvaluation;
 import tn.esprit.pidev.services.ServicePoste;
 
@@ -49,6 +52,22 @@ public class Dashboard  implements Initializable {
         private Stage showCompetencesStage;
         
         @FXML
+        private Text totEval;
+        
+        
+        @FXML
+        private Text totemp;
+        
+        
+        
+        @FXML
+        private Text totcomp;
+        
+        
+        @FXML
+        private Text totpos;
+          
+        @FXML
 private BarChart<String, Number> barChart;
 @FXML
 private AnchorPane barChartPane;
@@ -59,6 +78,31 @@ private AnchorPane pieChartPane;
 @Override
 public void initialize(URL url, ResourceBundle rb) {
     ServiceEvaluation se = new ServiceEvaluation();
+    ServiceCompetence sc = new ServiceCompetence();
+    ServiceEmployee see = new ServiceEmployee();
+    ServicePoste sp = new ServicePoste();
+
+    
+            try {
+               
+                String totalEvaluations = String.valueOf(se.selectAll().size());
+                String totalPostes = String.valueOf(sp.selectAll().size());
+                String totalemp = String.valueOf(see.selectAll().size());
+                String totalCompetences = String.valueOf(sc.selectAll().size());
+                totEval.setText(totalEvaluations);
+                totcomp.setText(totalCompetences);
+                totemp.setText(totalemp);
+                totpos.setText(totalPostes);
+
+            } catch (SQLException ex) {
+                Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+              int numberOfEvaluations= se.selectAll().size();
+                System.out.println(numberOfEvaluations);
+            } catch (SQLException ex) {
+                Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+            }
     try {
         int seniorCount = se.countEmployeesByLevel("senior");
         int stagaireCount = se.countEmployeesByLevel("stagaire");
@@ -215,25 +259,13 @@ private void showPostes(ActionEvent event) {
     private void showEvaluations(ActionEvent event) {
     try {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../gui/showEvaluations.fxml"));
-        
         Parent root = loader.load();
-        // Get the ListView from the FXML file
-        ListView<Evaluation> listView = (ListView<Evaluation>) root.lookup("#evaluationsList");
-        // Retrieve the list of competences
-        ServiceEvaluation se = new ServiceEvaluation();
-        List<Evaluation> evaluations = se.selectAll();
-        // Set the items of the ListView
-        ObservableList<Evaluation> items = FXCollections.observableArrayList(evaluations);
-        listView.setItems(items);
         Scene scene = new Scene(root);
         Stage st = new Stage();
         st.setTitle("Liste des Competences");
         st.setScene(scene);
         st.show();
     } catch (IOException ex) {
-        System.err.println(ex.getMessage());
-        ex.printStackTrace();
-    } catch (SQLException ex) {
         System.err.println(ex.getMessage());
         ex.printStackTrace();
     }
